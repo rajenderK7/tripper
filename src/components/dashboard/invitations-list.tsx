@@ -13,6 +13,7 @@ import {
 import { Invitation, InvitationAction, InvitationDB } from "@/types/invitation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { format } from "date-fns/format";
 
 export function InvitationsList() {
   const [invitations, setInvitations] = useState<Invitation[]>([]);
@@ -27,16 +28,19 @@ export function InvitationsList() {
       }
       const data = (await res.json()) as InvitationDB[];
       const invitations = data.map((i) => {
-        const date = i.trip.start_date.toDate();
+        // TODO: Using the "_seconds" field because the Timestamp is no more
+        // returned from the DB instead an object.
+        // For now using the InvitationDB type but not necessarily the right approach.
+        const startDate = new Date(i.trip.start_date._seconds * 1000);
         return {
           ...i,
           trip: {
             ...i.trip,
-            start_date: date,
+            start_date: startDate,
           },
         };
       });
-      setInvitations(invitations);
+      setInvitations(invitations as Invitation[]);
     } catch (error: any) {
       throw new Error(error);
     }
@@ -94,7 +98,9 @@ export function InvitationsList() {
                 </div>
                 <div className="flex items-center text-sm text-muted-foreground">
                   <Calendar className="mr-2 h-4 w-4" />
-                  {"invitation.trip.start_date.toDateString()"}
+                  <time dateTime={invitation.trip.start_date.toISOString()}>
+                    {format(invitation.trip.start_date, "MMM d, yyyy")}
+                  </time>
                 </div>
                 <div className="text-sm text-muted-foreground">
                   Invited by {invitation.invited_by}
