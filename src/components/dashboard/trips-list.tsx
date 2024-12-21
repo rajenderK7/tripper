@@ -22,6 +22,7 @@ const fetchTrips = async (username: string): Promise<Trip[]> => {
     });
     return trips;
   } catch (error) {
+    console.error(error);
     throw new Error("Please try after sometime.");
   }
 };
