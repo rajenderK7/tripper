@@ -27,7 +27,7 @@ export async function GET(
   }
 
   // TODO: ADD ORDER BY CLAUSE
-  const res = await q.get();
+  const res = await q.orderBy("date", "desc").get();
   const expenses = res.docs.map((e) => {
     return e.data();
   });

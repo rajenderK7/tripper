@@ -25,7 +25,7 @@ export function ExpenseList({ expenses }: ExpenseListProps) {
               </CardTitle>
               <div className="flex items-center font-bold text-lg">
                 <Wallet className="mr-1 h-4 w-4" />
-                {expense.amount.toFixed(2)}
+                {expense.amount}
               </div>
             </CardHeader>
             <CardContent>

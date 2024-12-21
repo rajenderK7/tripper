@@ -11,7 +11,7 @@ const fetchTrips = async (username: string): Promise<Trip[]> => {
     const res = await getDB()
       .collection("trip")
       .where("members", "array-contains", username)
-      // .orderBy("start_date", "desc")
+      .orderBy("start_date", "desc")
       .get();
     const trips = res.docs.map((t) => {
       const data = t.data() as TripDB;

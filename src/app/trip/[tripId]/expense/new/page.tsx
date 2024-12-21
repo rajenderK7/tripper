@@ -257,7 +257,7 @@ export default function NewExpensePage() {
                             </span>
                             <Input
                               type="number"
-                              step="0.01"
+                              step="1.00"
                               min="0"
                               placeholder="0.00"
                               className="pl-8"
@@ -539,7 +539,7 @@ export default function NewExpensePage() {
                       type="button"
                       variant="outline"
                       className="flex-1"
-                      onClick={() => router.push(`/trips/${trip_id}`)}
+                      onClick={() => router.replace(`/trip/${trip_id}`)}
                       disabled={isSubmitting}
                     >
                       Cancel
