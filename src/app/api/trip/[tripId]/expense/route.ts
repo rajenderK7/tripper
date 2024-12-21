@@ -26,6 +26,7 @@ export async function GET(
     q = q.where("created_by", "==", searchParams.get("created_by"));
   }
 
+  // TODO: ADD ORDER BY CLAUSE
   const res = await q.get();
   const expenses = res.docs.map((e) => {
     return e.data();

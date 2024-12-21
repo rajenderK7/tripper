@@ -14,11 +14,14 @@ import { Invitation, InvitationAction, InvitationDB } from "@/types/invitation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { format } from "date-fns/format";
+import Spinner from "../spinner";
 
 export function InvitationsList() {
+  const [loading, setLoading] = useState(false);
   const [invitations, setInvitations] = useState<Invitation[]>([]);
 
   const fetchInvitations = async () => {
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/trip/invitation`
@@ -43,10 +46,13 @@ export function InvitationsList() {
       setInvitations(invitations as Invitation[]);
     } catch (error: any) {
       throw new Error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleInvitationAction = async (action: InvitationAction) => {
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/trip/invitation`,
@@ -69,6 +75,8 @@ export function InvitationsList() {
         description: "Please try again later",
         icon: "❌",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,7 +86,12 @@ export function InvitationsList() {
 
   return (
     <div className="grid gap-4">
-      {invitations.length === 0 && (
+      {loading && (
+        <div className="mt-12 flex justify-center">
+          <Spinner />
+        </div>
+      )}
+      {!loading && invitations.length === 0 && (
         <div className="text-center text-muted-foreground py-10">
           <p>No pending invitations</p>
           <p> Create or join a trip</p>
