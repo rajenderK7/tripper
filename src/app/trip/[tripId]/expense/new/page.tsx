@@ -206,7 +206,7 @@ export default function NewExpensePage() {
         <div className="mx-auto max-w-2xl">
           <div className="mb-8">
             <Link
-              href={`/trips/${trip_id}`}
+              href={`/trip/${trip_id}`}
               className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -417,11 +417,12 @@ export default function NewExpensePage() {
                                     }}
                                   />
                                 ))}
-                              {filteredMembers.length === 0 && (
-                                <p className="text-center text-sm text-muted-foreground py-4">
-                                  No members found
-                                </p>
-                              )}
+                              {filteredMembers &&
+                                filteredMembers.length === 0 && (
+                                  <p className="text-center text-sm text-muted-foreground py-4">
+                                    No members found
+                                  </p>
+                                )}
                             </div>
                           </ScrollArea>
                         </div>
