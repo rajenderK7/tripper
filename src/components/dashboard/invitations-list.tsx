@@ -34,7 +34,7 @@ export function InvitationsList() {
         // TODO: Using the "_seconds" field because the Timestamp is no more
         // returned from the DB instead an object.
         // For now using the InvitationDB type but not necessarily the right approach.
-        const startDate = new Date(i.trip.start_date._seconds * 1000);
+        const startDate = new Date((i.trip.start_date as any)._seconds * 1000);
         return {
           ...i,
           trip: {
