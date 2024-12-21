@@ -1,9 +1,12 @@
 import admin, { ServiceAccount } from "firebase-admin";
-import serviceAccount from "../../firebaseServiceAccount.json";
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount as ServiceAccount),
+    credential: admin.credential.cert({
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+    }),
   });
 }
 
