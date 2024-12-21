@@ -81,12 +81,14 @@ export async function POST(request: Request) {
         id: inviteRef.id,
         trip: tripInvitation,
         invitee: invitee,
-        invited_by: tripData.created_by!!,
+        invited_by: user.username!!,
       };
       batch.create(inviteRef, invitation);
     });
 
     await batch.commit();
+
+    // Value for argument "data" is not a valid Firestore document. Cannot use "undefined" as a Firestore value (found in field "invited_by"). If you want to ignore undefined values, enable `ignoreUndefinedProperties`.
 
     return Response.json(null, { status: 200 });
   } catch (error) {

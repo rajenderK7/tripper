@@ -100,7 +100,6 @@ export default function NewTripPage() {
   async function onSubmit(formData: TripFormValues) {
     try {
       setIsSubmitting(true);
-      console.log(formData);
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trip`, {
         method: "POST",
         body: JSON.stringify(formData),
@@ -323,7 +322,7 @@ export default function NewTripPage() {
                     type="button"
                     variant="outline"
                     className="flex-1"
-                    onClick={() => router.push("/trips")}
+                    onClick={() => router.push("/")}
                     disabled={isSubmitting}
                   >
                     Cancel
