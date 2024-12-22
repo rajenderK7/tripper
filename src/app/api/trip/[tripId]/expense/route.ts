@@ -26,11 +26,12 @@ export async function GET(
     q = q.where("created_by", "==", searchParams.get("created_by"));
   }
 
-  // TODO: ADD ORDER BY CLAUSE
-  const res = await q.orderBy("date", "desc").get();
+  q = q.orderBy("date", "desc");
+  const res = await q.get();
   const expenses = res.docs.map((e) => {
     return e.data();
   });
+  console.log("BEN10: ", expenses);
   return Response.json(expenses, {
     status: 200,
   });

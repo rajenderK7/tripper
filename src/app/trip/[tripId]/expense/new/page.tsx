@@ -40,7 +40,6 @@ import {
 } from "@/components/ui/popover";
 import { format } from "date-fns/format";
 import { Calendar } from "@/components/ui/calendar";
-import { error } from "console";
 import { toast } from "sonner";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -120,7 +119,7 @@ export default function NewExpensePage() {
       }
       const data = (await res.json()) as string[];
       setMembers(data);
-      // setFilteredMembers([]);
+      setFilteredMembers(data);
     } catch (error) {
       throw new Error((error as Error).message);
     }

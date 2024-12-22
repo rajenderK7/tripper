@@ -39,9 +39,11 @@ const fetchTrip = async (
 
 const fetchExpenses = async (trip_id: string): Promise<Expense[]> => {
   try {
-    let q = getDB().collection("expense").where("trip_id", "==", trip_id);
-
-    const res = await q.get();
+    const res = await getDB()
+      .collection("expense")
+      .where("trip_id", "==", trip_id)
+      .orderBy("date", "desc")
+      .get();
     const expenses = res.docs.map((e) => {
       const data = e.data() as ExpenseDB;
       return {

@@ -20,12 +20,12 @@ export async function GET(
   const res = await getDB()
     .collection("trip")
     .select("members")
-    .where("trip_id", "==", tripId)
+    .where("id", "==", tripId)
     .get();
 
   let data = null;
   if (res.docs.length > 0) {
-    data = res.docs[0].data().members;
+    data = res.docs[0].data().members as string[];
   }
   return Response.json(data, {
     status: 200,
