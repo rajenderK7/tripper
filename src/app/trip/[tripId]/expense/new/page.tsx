@@ -118,9 +118,9 @@ export default function NewExpensePage() {
       if (!res.ok) {
         throw new Error("Error fetching trip members. Please try again later.");
       }
-      const data = await res.json();
+      const data = (await res.json()) as string[];
       setMembers(data);
-      setFilteredMembers(data);
+      // setFilteredMembers([]);
     } catch (error) {
       throw new Error((error as Error).message);
     }

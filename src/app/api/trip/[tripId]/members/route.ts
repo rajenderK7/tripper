@@ -18,7 +18,7 @@ export async function GET(
   const tripId = (await params).tripId;
 
   const res = await getDB()
-    .collection("expense")
+    .collection("trip")
     .select("members")
     .where("trip_id", "==", tripId)
     .get();

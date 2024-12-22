@@ -11,6 +11,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import MembersList from "@/components/members-list";
 import { getDB } from "@/db/firebase";
 import { notFound } from "next/navigation";
+import { ExpensesSection } from "@/components/trip/expenses-section";
 
 const fetchTrip = async (
   trip_id: string,
@@ -88,7 +89,7 @@ export default async function TripPage({
             </Link>
           </div>
 
-          <div className="grid gap-6">
+          <div className="grid gap-4">
             {/* Trip Details Card */}
             <Card>
               <CardHeader>
@@ -115,39 +116,11 @@ export default async function TripPage({
             </Card>
 
             {/* Expenses Section */}
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0">
-                <div>
-                  <CardTitle>Expenses</CardTitle>
-                  <p className="text-sm text-muted-foreground">
-                    Total: {totalExpense} (All expenses)
-                  </p>
-                </div>
-                <Link href={`/trip/${trip_id}/expense/new`}>
-                  <Button>Add Expense</Button>
-                </Link>
-              </CardHeader>
-              <CardContent>
-                <Tabs defaultValue="my-expenses" className="w-full">
-                  <TabsList className="w-full">
-                    <TabsTrigger value="my-expenses" className="flex-1">
-                      My Expenses
-                    </TabsTrigger>
-                    <TabsTrigger value="all-expenses" className="flex-1">
-                      All Expenses
-                    </TabsTrigger>
-                  </TabsList>
-                  <div className="mt-4">
-                    <TabsContent value="my-expenses">
-                      <ExpenseList expenses={myExpenses} />
-                    </TabsContent>
-                    <TabsContent value="all-expenses">
-                      <ExpenseList expenses={expenses} />
-                    </TabsContent>
-                  </div>
-                </Tabs>
-              </CardContent>
-            </Card>
+            <ExpensesSection
+              tripId={trip_id}
+              allExpenses={expenses}
+              myExpenses={myExpenses}
+            />
           </div>
         </div>
       </main>
