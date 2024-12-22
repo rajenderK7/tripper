@@ -51,12 +51,20 @@ export async function POST(request: Request) {
     )) as Trip;
     const tripRef = getDB().collection("trip").doc();
 
+    const utcDate = new Date(
+      Date.UTC(
+        tripData.start_date.getFullYear(),
+        tripData.start_date.getMonth(),
+        tripData.start_date.getDate()
+      )
+    );
+
     const tripDB: TripDB = {
       id: tripRef.id,
       title: tripData.title,
       location: tripData.location,
       created_by: user.username!!,
-      start_date: firestore.Timestamp.fromDate(tripData.start_date),
+      start_date: firestore.Timestamp.fromDate(utcDate),
       planned_dates: tripData.planned_dates,
       members: [user.username!!],
       invitees: tripData.invitees,
@@ -87,8 +95,6 @@ export async function POST(request: Request) {
     });
 
     await batch.commit();
-
-    // Value for argument "data" is not a valid Firestore document. Cannot use "undefined" as a Firestore value (found in field "invited_by"). If you want to ignore undefined values, enable `ignoreUndefinedProperties`.
 
     return Response.json(null, { status: 200 });
   } catch (error) {
