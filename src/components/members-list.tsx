@@ -7,10 +7,10 @@ interface MembersProps {
 
 const MembersList = ({ members }: MembersProps) => {
   return (
-    <div className="flex">
-      {members.map((m) => {
+    <div className="flex flex-wrap">
+      {members.map((m, i) => {
         return (
-          <Badge className="mr-2" key={m} variant="outline">
+          <Badge className="mr-2 mb-2" key={i} variant="outline">
             {m}
           </Badge>
         );

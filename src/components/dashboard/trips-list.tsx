@@ -60,7 +60,9 @@ export async function TripsList({ username }: { username: string }) {
                 </div>
                 <div className="flex text-sm text-muted-foreground">
                   <Users className="mr-2 h-4 w-4" />
-                  <MembersList members={trip.members ?? []} />
+                  <div className="flex-1">
+                    <MembersList members={trip.members ?? []} />
+                  </div>
                 </div>
               </div>
             </CardContent>

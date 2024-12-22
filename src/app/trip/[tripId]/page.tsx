@@ -108,9 +108,11 @@ export default async function TripPage({
                       <Calendar className="mr-2 h-4 w-4" />
                       {trip.planned_dates}
                     </div>
-                    <div className="flex items-center text-sm text-muted-foreground">
+                    <div className="flex text-sm text-muted-foreground">
                       <Users className="mr-2 h-4 w-4" />
-                      <MembersList members={trip.members ?? []} />
+                      <div className="flex-1">
+                        <MembersList members={trip.members ?? []} />
+                      </div>
                     </div>
                   </div>
                 </div>
