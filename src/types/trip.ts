@@ -9,6 +9,7 @@ export interface Trip {
   planned_dates: string; // Eg: July 15-20, 2025
   members?: string[];
   invitees?: string[];
+  completed?: boolean;
 }
 
 export interface TripDB extends Omit<Trip, "start_date"> {

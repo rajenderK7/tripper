@@ -68,6 +68,7 @@ export async function POST(request: Request) {
       planned_dates: tripData.planned_dates,
       members: [user.username!!],
       invitees: tripData.invitees,
+      completed: false,
     };
 
     const db = getDB();
