@@ -48,6 +48,10 @@ export async function POST(request: Request) {
     const batch = db.batch();
 
     const tripRef = db.doc(`trip/${data.trip_id}`);
+
+    // TODO: Check if the trip has already started or completed.
+    // In those cases simple send the appropriate message and delete the inviation entry.
+
     // Add the user to members only if invitation is accepted otherwise
     // just remove the user from invitees and delete the invitation.
     if (data.accept) {
