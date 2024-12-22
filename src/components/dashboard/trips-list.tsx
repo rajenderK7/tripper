@@ -1,4 +1,4 @@
-import { Calendar, MapPin, Users } from "lucide-react";
+import { Calendar, Clock, MapPin, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trip, TripDB } from "@/types/trip";
 import Link from "next/link";
@@ -57,6 +57,10 @@ export async function TripsList({ username }: { username: string }) {
                   <time dateTime={trip.start_date.toISOString()}>
                     {format(trip.start_date, "MMM d, yyyy")}
                   </time>
+                </div>
+                <div className="flex items-center text-sm text-muted-foreground">
+                  <Clock className="mr-2 h-4 w-4" />
+                  {trip.planned_dates}
                 </div>
                 <div className="flex text-sm text-muted-foreground">
                   <Users className="mr-2 h-4 w-4" />

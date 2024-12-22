@@ -97,7 +97,6 @@ export function InvitationsList() {
       {!loading && invitations.length === 0 && (
         <div className="text-center text-muted-foreground py-10">
           <p>No pending invitations</p>
-          <p> Create or join a trip</p>
         </div>
       )}
       {!loading &&
