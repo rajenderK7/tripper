@@ -5,18 +5,9 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function TripDetailsLoading() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="h-14 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
-          <Skeleton className="h-8 w-24" />
-          <div className="flex flex-1 items-center justify-end space-x-2">
-            <Skeleton className="h-8 w-8 rounded-full" />
-            <Skeleton className="h-8 w-8 rounded-full" />
-          </div>
-        </div>
-      </div>
-      <main className="container py-6">
+      <main className="container py-4">
         <div className="mx-auto max-w-4xl">
-          <div className="mb-8">
+          <div className="mb-2">
             <Skeleton className="h-4 w-24" />
           </div>
 
