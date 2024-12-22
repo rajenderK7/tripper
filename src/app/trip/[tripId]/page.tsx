@@ -76,9 +76,9 @@ export default async function TripPage({
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="container py-6">
+      <main className="container py-4">
         <div className="mx-auto max-w-4xl">
-          <div className="mb-8">
+          <div className="mb-2">
             <Link
               href="/"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"

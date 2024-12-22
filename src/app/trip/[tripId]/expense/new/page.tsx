@@ -52,13 +52,16 @@ const expenseFormSchema = z.object({
     .min(3, { message: "Title must be at least 3 characters long" })
     .max(50, { message: "Title must be less than 50 characters" }),
   amount: z
-    .string()
-    .refine((val) => !isNaN(Number(val)), {
-      message: "Amount must be a number",
-    })
-    .refine((val) => Number(val) > 0, {
-      message: "Amount must be greater than 0",
-    }),
+    .number({ required_error: "What's the amount?" })
+    .positive({ message: "Amount must be positive" })
+    .int({ message: "Amount must be integer" })
+    .or(z.string())
+    .pipe(
+      z.coerce
+        .number({ required_error: "What's the amount?" })
+        .positive({ message: "Amount must be positive" })
+        .int({ message: "Amount must be integer" })
+    ),
   description: z
     .string()
     .max(500, { message: "Description must be less than 200 characters" })
@@ -127,7 +130,7 @@ export default function NewExpensePage() {
     resolver: zodResolver(expenseFormSchema),
     defaultValues: {
       title: "",
-      amount: "0",
+      amount: 1,
       description: "",
       members: [currentUser], // Current user is selected by default
     },
@@ -202,9 +205,9 @@ export default function NewExpensePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="container py-6">
+      <main className="container py-4">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8">
+          <div className="mb-2">
             <Link
               href={`/trip/${trip_id}`}
               className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
@@ -259,9 +262,17 @@ export default function NewExpensePage() {
                               type="number"
                               step="1.00"
                               min="0"
-                              placeholder="0.00"
                               className="pl-8"
+                              placeholder="0.00" // your defaultValue must be undefined
+                              inputMode="numeric" // display numeric keyboard on mobile
                               {...field}
+                              value={field.value || ""} // avoid errors of uncontrolled vs controlled
+                              pattern="[0-9]*" // to receive only numbers without showing does weird arrows in the input
+                              onChange={
+                                (e) =>
+                                  e.target.validity.valid &&
+                                  field.onChange(e.target.value) // e.target.validity.valid is required for pattern to work
+                              }
                             />
                           </div>
                         </FormControl>

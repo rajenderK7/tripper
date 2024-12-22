@@ -97,7 +97,8 @@ export function InvitationsList() {
           <p> Create or join a trip</p>
         </div>
       )}
-      {invitations.length > 0 &&
+      {!loading &&
+        invitations.length > 0 &&
         invitations.map((invitation) => (
           <Card key={invitation.id}>
             <CardHeader>
