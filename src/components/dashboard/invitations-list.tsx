@@ -15,10 +15,12 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { format } from "date-fns/format";
 import Spinner from "../spinner";
+import { useRouter } from "next/navigation";
 
 export function InvitationsList() {
   const [loading, setLoading] = useState(false);
   const [invitations, setInvitations] = useState<Invitation[]>([]);
+  const router = useRouter();
 
   const fetchInvitations = async () => {
     setLoading(true);
@@ -70,6 +72,7 @@ export function InvitationsList() {
       }
       // Reload invitations
       fetchInvitations();
+      router.refresh();
     } catch (error) {
       toast("Unable to act on the invitation", {
         description: "Please try again later",
